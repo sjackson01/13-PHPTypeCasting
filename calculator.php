@@ -10,11 +10,18 @@
 // Check if the form has been submitted:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    // Cast all the variables to a specific type:
+    $quantity = (int) $_POST['quantity'];
+    $price = (float) $_POST['price'];     
+    $tax = (float) $_POST['tax'];
+    
+    // All variables should be positive!
+    if ( ($quantity > 0) && ($price > 0) && ($tax > 0) ) {
      
     // Calculate the total:
     $total = $quantity * $price;
     $total += $total * ($tax/100);
-
+    }
     // Print the result:
     echo '<p>The total cost of purchasing ' . $quantity . ' widget(s) at $' . 
          number_format($price, 2) . ' each, plus tax, is $' . number_format($total, 2) . '.</p>';
